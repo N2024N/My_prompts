@@ -11,6 +11,7 @@ import uuid
 from datetime import datetime
 import logging
 from notion_client import Client
+from supabase_service import get_supabase_service
 
 # Load environment variables
 load_dotenv()
@@ -102,11 +103,42 @@ class ActivationResponse(BaseModel):
 
 # Dependency for activation code validation
 async def verify_activation(activation_code: str = Header(..., alias="X-Activation-Code")):
-    # TODO: Implement activation code validation with Supabase
-    # For now, accept any code (development only)
+    """
+    Validate activation code for protected endpoints.
+    This is used by /optimize and /evaluate endpoints.
+    """
     if not activation_code:
         raise HTTPException(status_code=401, detail="Activation code required")
-    return activation_code
+    
+    try:
+        # Validate against Supabase
+        supabase = get_supabase_service()
+        validation = supabase.validate_activation_code(activation_code)
+        
+        if not validation.get("valid"):
+            logger.warning(f"Invalid activation code in header: {activation_code[:8]}... - {validation.get('message')}")
+            raise HTTPException(
+                status_code=401,
+                detail=f"Invalid activation code: {validation.get('message')}"
+            )
+        
+        # Check if code is already used (should be used by now)
+        record = validation.get("record", {})
+        if record.get("status") != "used":
+            logger.warning(f"Activation code not marked as used: {activation_code[:8]}...")
+            # Still allow access, but log warning
+        
+        logger.debug(f"Valid activation code: {activation_code[:8]}...")
+        return activation_code
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.exception(f"Error validating activation code: {e}")
+        raise HTTPException(
+            status_code=500,
+            detail=f"Error validating activation code: {str(e)}"
+        )
 
 # Health check endpoint
 @app.get("/")
@@ -142,23 +174,52 @@ async def activate(request: ActivationRequest):
     Activate a purchased copy of Prompt Studio.
     Validates the activation code and links it to a Notion page.
     """
-    # TODO: Implement actual activation logic
-    # 1. Check activation code in Supabase
-    # 2. Mark as used with notion_page_id
-    # 3. Return success
-    
-    # Mock implementation for now
-    if not request.activation_code or not request.notion_page_id:
-        raise HTTPException(status_code=400, detail="Activation code and Notion page ID are required")
-    
-    # In production, validate against Supabase
     logger.info(f"Activation requested for code: {request.activation_code[:8]}..., page: {request.notion_page_id}")
     
-    return ActivationResponse(
-        success=True,
-        message="Activation successful. Your Prompt Studio is now ready to use.",
-        api_url=API_BASE_URL
-    )
+    try:
+        # Get Supabase service
+        supabase = get_supabase_service()
+        
+        # 1. Validate activation code
+        validation = supabase.validate_activation_code(request.activation_code)
+        
+        if not validation.get("valid"):
+            logger.warning(f"Invalid activation code: {request.activation_code[:8]}... - {validation.get('message')}")
+            raise HTTPException(
+                status_code=400, 
+                detail=f"Invalid activation code: {validation.get('message')}"
+            )
+        
+        # 2. Mark code as used with notion_page_id
+        mark_result = supabase.mark_activation_code_used(
+            code=request.activation_code,
+            notion_page_id=request.notion_page_id
+        )
+        
+        if not mark_result.get("success"):
+            logger.error(f"Failed to mark activation code as used: {mark_result.get('message')}")
+            raise HTTPException(
+                status_code=500,
+                detail=f"Failed to activate license: {mark_result.get('message')}"
+            )
+        
+        logger.info(f"Activation successful for code: {request.activation_code[:8]}...")
+        
+        return ActivationResponse(
+            success=True,
+            message="Activation successful. Your Prompt Studio is now ready to use.",
+            api_url=API_BASE_URL
+        )
+        
+    except HTTPException:
+        # Re-raise HTTP exceptions
+        raise
+    except Exception as e:
+        logger.exception(f"Unexpected error during activation: {e}")
+        raise HTTPException(
+            status_code=500,
+            detail=f"Internal server error during activation: {str(e)}"
+        )
 
 # Prompt optimization endpoint
 @app.post("/optimize", response_model=PromptOptimizationResponse)
