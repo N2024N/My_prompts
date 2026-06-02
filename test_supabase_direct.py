@@ -3,12 +3,12 @@ import json
 
 print("=== 直接测试Supabase REST API ===")
 
-SUPABASE_URL = "https://nbdgzuuilowcaiazldve.supabase.co"
+SUPABASE_URL = "https://your-project.supabase.co"
 # 测试三个密钥
 keys = [
-    "sb_publishable_uv2YamrT0CiUyaR9_-QHHw_hgyNVVA0",  # anon/public key
-    "sb_secret_E4qv-011de1r0MNTu-RnFw_gogvOgCP",       # 旧secret key
-    "sb_secret_qDaUOyofEJ596T68w6kK3A_Xl_P2VsX"        # 新secret key
+    "sb_publishable_your_public_key_here",  # anon/public key
+    "sb_secret_your_old_secret_key_here",   # 旧secret key
+    "sb_secret_your_new_secret_key_here"    # 新secret key
 ]
 
 # 测试1: 使用apikey头访问REST端点

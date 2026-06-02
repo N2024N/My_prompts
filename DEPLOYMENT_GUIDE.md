@@ -7,10 +7,10 @@
 1. **Railway 账户**：访问 [railway.app](https://railway.app) 注册（支持 GitHub 登录）
 2. **GitHub 账户**（可选）：用于代码仓库同步
 3. **环境变量**：确保已准备好以下密钥：
-   - `NOTION_API_KEY`: `ntn_140109928707...`
-   - `DEEPSEEK_API_KEY`: `sk-a1ede235812b...`
-   - `SUPABASE_URL`: `https://nbdgzuuilowcaiazldve.supabase.co`
-   - `SUPABASE_KEY`: `sb_secret_qDaUOyofEJ596T68w6kK3A_Xl_P2VsX`
+   - `NOTION_API_KEY`: `ntn_your_notion_integration_secret`
+   - `DEEPSEEK_API_KEY`: `sk_your_deepseek_api_key_here`
+   - `SUPABASE_URL`: `https://your-project.supabase.co`
+   - `SUPABASE_KEY`: `sb_secret_your_supabase_secret_key_here`
 
 ## 部署选项
 
@@ -45,10 +45,10 @@ git push -u origin main
 1. 在 Railway 项目页面，进入 "Variables" 标签页
 2. 添加以下环境变量：
    ```
-   NOTION_API_KEY=ntn_140109928707...
-   DEEPSEEK_API_KEY=sk-a1ede235812b...
-   SUPABASE_URL=https://nbdgzuuilowcaiazldve.supabase.co
-   SUPABASE_KEY=sb_secret_qDaUOyofEJ596T68w6kK3A_Xl_P2VsX
+   NOTION_API_KEY=ntn_your_notion_integration_secret
+   DEEPSEEK_API_KEY=sk_your_deepseek_api_key_here
+   SUPABASE_URL=https://your-project.supabase.co
+   SUPABASE_KEY=sb_secret_your_supabase_secret_key_here
    ```
 3. 保存后 Railway 会自动重启服务
 
@@ -84,10 +84,10 @@ railway up
 
 **步骤 5：设置环境变量**
 ```bash
-railway variables set NOTION_API_KEY=ntn_140109928707...
-railway variables set DEEPSEEK_API_KEY=sk-a1ede235812b...
-railway variables set SUPABASE_URL=https://nbdgzuuilowcaiazldve.supabase.co
-railway variables set SUPABASE_KEY=sb_secret_qDaUOyofEJ596T68w6kK3A_Xl_P2VsX
+railway variables set NOTION_API_KEY=ntn_your_notion_integration_secret
+railway variables set DEEPSEEK_API_KEY=sk_your_deepseek_api_key_here
+railway variables set SUPABASE_URL=https://your-project.supabase.co
+railway variables set SUPABASE_KEY=sb_secret_your_supabase_secret_key_here
 ```
 
 ### 选项三：通过 Railway Web 界面直接上传

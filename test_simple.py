@@ -3,10 +3,10 @@ from notion_client import Client
 from supabase import create_client
 
 print("=== Supabase 测试 ===")
-SUPABASE_URL = "https://nbdgzuuilowcaiazldve.supabase.co"
+SUPABASE_URL = "https://your-project.supabase.co"
 keys = [
-    "sb_publishable_uv2YamrT0CiUyaR9_-QHHw_hgyNVVA0",
-    "sb_secret_E4qv-011de1r0MNTu-RnFw_gogvOgCP"
+    "sb_publishable_your_public_key_here",
+    "sb_secret_your_secret_key_here"
 ]
 
 for key in keys:
@@ -22,7 +22,7 @@ for key in keys:
         print(f"失败: {type(e).__name__}: {e}")
 
 print("\n\n=== Notion 测试 ===")
-NOTION_API_KEY = "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"
+NOTION_API_KEY = "ntn_your_notion_integration_secret"
 database_id = "36d3431ec8e68076a1e7000c59505208"  # prompts数据库
 
 try:

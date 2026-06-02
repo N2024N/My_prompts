@@ -20,7 +20,7 @@ class SupabaseService:
         Initialize Supabase service.
         
         Args:
-            url: Supabase project URL (e.g., https://nbdgzuuilowcaiazldve.supabase.co)
+            url: Supabase project URL (e.g., https://your-project.supabase.co)
             key: Service Role Key (sb_secret_...)
         """
         self.url = url or os.getenv("SUPABASE_URL")

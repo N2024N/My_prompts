@@ -141,8 +141,8 @@ AI Prompt Engineering Studio 需要5个Notion数据库来存储所有数据。�
    evaluations：36e3431ec8e680de85b2000c8a2d278a
    prompt_templates 数据库ID是：36e3431ec8e680b4b39e000c06943ed0
 2.supabase连接信息：
-   API秘钥：sb_publishable_uv2YamrT0CiUyaR9_-QHHw_hgyNVVA0
-   project URL：https://nbdgzuuilowcaiazldve.supabase.co
+   API秘钥：sb_publishable_your_public_key_here
+   project URL：https://your-project.supabase.co
 3.Railway用户名：n2024n
 4.提示词示例：
    # 角色 Role

@@ -1,12 +1,12 @@
 import os
 from supabase import create_client, Client
 
-SUPABASE_URL = "https://nbdgzuuilowcaiazldve.supabase.co"
+SUPABASE_URL = "https://your-project.supabase.co"
 
 # 测试两个密钥
 keys_to_test = [
-    ("sb_publishable_uv2YamrT0CiUyaR9_-QHHw_hgyNVVA0", "可发布密钥 (anon/public)"),
-    ("sb_secret_E4qv-011de1r0MNTu-RnFw_gogvOgCP", "秘密密钥 (service role)")
+    ("sb_publishable_your_public_key_here", "可发布密钥 (anon/public)"),
+    ("sb_secret_your_secret_key_here", "秘密密钥 (service role)")
 ]
 
 for key, description in keys_to_test:

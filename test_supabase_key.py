@@ -2,8 +2,8 @@ import os
 from supabase import create_client, Client
 
 # 从环境变量读取
-SUPABASE_URL = "https://nbdgzuuilowcaiazldve.supabase.co"
-SUPABASE_KEY = "sb_secret_E4qv-011de1r0MNTu-RnFw_gogvOgCP"
+SUPABASE_URL = "https://your-project.supabase.co"
+SUPABASE_KEY = "sb_secret_your_secret_key_here"
 
 print(f"URL: {SUPABASE_URL}")
 print(f"Key: {SUPABASE_KEY[:20]}...")

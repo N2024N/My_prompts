@@ -3,7 +3,7 @@ from notion_client import Client
 
 print("=== 测试Notion连接状态 ===")
 
-NOTION_API_KEY = "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"
+NOTION_API_KEY = "ntn_your_notion_integration_secret"
 database_id = "36d3431ec8e68076a1e7000c59505208"  # prompts数据库
 
 try:

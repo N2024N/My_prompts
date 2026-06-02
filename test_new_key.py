@@ -2,8 +2,8 @@ import os
 from supabase import create_client
 
 print("=== 测试新Supabase密钥 ===")
-SUPABASE_URL = "https://nbdgzuuilowcaiazldve.supabase.co"
-SUPABASE_KEY = "sb_secret_qDaUOyofEJ596T68w6kK3A_Xl_P2VsX"
+SUPABASE_URL = "https://your-project.supabase.co"
+SUPABASE_KEY = "sb_secret_your_new_secret_key_here"
 
 print(f"URL: {SUPABASE_URL}")
 print(f"Key: {SUPABASE_KEY[:20]}...")
